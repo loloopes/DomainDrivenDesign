@@ -1,8 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-export class Pilot {
-  @PrimaryGeneratedColumn('increment')
+@Entity({ name: 'pilot', schema: 'public' })
+export class PilotEntity {
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column('text')

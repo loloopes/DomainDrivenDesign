@@ -17,8 +17,24 @@ export class Pilot {
     this.adjustBalance(contract.getValue());
   }
 
+  public getCertification(): string {
+    return this.certification;
+  }
+
+  public getCurrentPlane(): string {
+    return this.currentPlanet;
+  }
+
+  public getAge(): number {
+    return this.age;
+  }
+
   public getCredits(): number {
     return this.credits;
+  }
+
+  public getName(): string {
+    return this.name;
   }
 
   private adjustBalance(credits: number) {

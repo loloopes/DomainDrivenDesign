@@ -112,6 +112,7 @@ describe('Pilot test', () => {
 
     it('should adjust pilot`s credits after earning a contract', () => {
       const newPilot = pilotFixture();
+      const contratReward = 500;
 
       newPilot.earnContract(
         new Contract(
@@ -119,11 +120,15 @@ describe('Pilot test', () => {
           [new Resource(ResourcesEnum.FOOD, 50)],
           PlanetsEnum.ANDVARI,
           PlanetsEnum.AQUA,
-          500,
+          contratReward,
         ),
       );
 
-      expect(newPilot.getCredits()).toBe(pilot.credits + 500);
+      expect(newPilot.getCredits()).toBe(pilot.credits + contratReward);
+      expect(newPilot.getAge()).toBe(pilot.age);
+      expect(newPilot.getCertification()).toBe(pilot.certification);
+      expect(newPilot.getName()).toBe(pilot.name);
+      expect(newPilot.getCurrentPlane()).toBe(pilot.currentPlanet);
     });
   });
 });

@@ -3,7 +3,7 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
 export class pilot1657374922568 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`CREATE TABLE IF NOT EXISTS \`SCP\`.\`pilot\` (
-      \`id\` INT NOT NULL,
+      \`id\` INT NOT NULL AUTO_INCREMENT,
       \`certification\` VARCHAR(255) NULL,
       \`name\` VARCHAR(255) NULL,
       \`age\` INT NULL,

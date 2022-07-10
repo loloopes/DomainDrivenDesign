@@ -1,10 +1,14 @@
-import { Module } from '@nestjs/common';
-import { AppController } from '../controller/app.controller';
-import { AppService } from '../../application/app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from '@nestjs/common';
+import { PilotEntity } from '../entities/pilot.entity';
+import { AppController } from '../controller/app.controller';
+import { PilotRepository } from '../repository/pilot.repository';
+import { CreatePilotService } from '../../application/createPilot.service';
+import { AppService } from '../../application/app.service';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([PilotEntity]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -15,10 +19,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       migrations: [__dirname + '/**/*.migration{.ts,.js}'],
       synchronize: false,
-      migrationsRun: false,
+      migrationsRun: true,
+      autoLoadEntities: true,
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    CreatePilotService,
+    {
+      provide: 'PilotRepository',
+      useClass: PilotRepository,
+    },
+  ],
 })
 export class AppModule {}
