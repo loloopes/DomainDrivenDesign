@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "typeorm:create": "typeorm migration:create -n ",
+    "migration:generate": "npm run build && npm run typeorm migration:generate -- -n",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

@@ -9,6 +9,18 @@ export class Ship {
     this.validate();
   }
 
+  public getFuelCapacity(): number {
+    return this.fuelCapacity;
+  }
+
+  public getCargoCapacity(): number {
+    return this.cargoCapacity;
+  }
+
+  public getFuelLevel(): number {
+    return this.fuelLevel;
+  }
+
   private validate(): void {
     if (!this.fuelCapacity || this.fuelCapacity < 0) {
       throw new DomainException('Fuel capacity must a valid positive number');

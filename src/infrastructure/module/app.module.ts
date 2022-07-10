@@ -5,10 +5,13 @@ import { AppController } from '../controller/app.controller';
 import { PilotRepository } from '../repository/pilot.repository';
 import { CreatePilotService } from '../../application/createPilot.service';
 import { AppService } from '../../application/app.service';
+import { CreateShipService } from '../../application/createShip.service';
+import { ShipRepository } from '../repository/ship.repository';
+import { ShipEntity } from '../entities/ship.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([PilotEntity]),
+    TypeOrmModule.forFeature([PilotEntity, ShipEntity]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -27,9 +30,14 @@ import { AppService } from '../../application/app.service';
   providers: [
     AppService,
     CreatePilotService,
+    CreateShipService,
     {
       provide: 'PilotRepository',
       useClass: PilotRepository,
+    },
+    {
+      provide: 'ShipRepository',
+      useClass: ShipRepository,
     },
   ],
 })

@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker';
-import { Domain } from 'domain';
 import { DomainException } from '../../src/domain/exception/domain.exception';
 import { Ship } from '../../src/domain/ship';
 
@@ -80,6 +79,9 @@ describe('Ship test', () => {
       );
 
       expect(newShip).toBeInstanceOf(Ship);
+      expect(newShip.getFuelCapacity()).toBe(ship.fuelCapacity);
+      expect(newShip.getCargoCapacity()).toBe(ship.cargoCapacity);
+      expect(newShip.getFuelLevel()).toBe(ship.fuelLevel);
     });
   });
 });

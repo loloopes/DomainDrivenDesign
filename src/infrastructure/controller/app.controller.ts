@@ -8,10 +8,13 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { CreatePilotService } from 'src/application/createPilot.service';
-import { CreatePilotDTO } from 'src/application/dto/createPilotDTO';
+import { CreatePilotService } from '../../application/createPilot.service';
+import { CreateShipService } from '../../application/createShip.service';
+import { CreatePilotDTO } from '../../application/dto/createPilotDTO';
 import { AppService } from '../../application/app.service';
 import { CreatePilotRequest } from './request/createPilot.request';
+import { CreateShipRequest } from './request/createShip.request';
+import { CreateShipDTO } from 'src/application/dto/createShipDTO';
 
 @Controller()
 export class AppController {
@@ -20,6 +23,8 @@ export class AppController {
     private readonly appService: AppService,
     @Inject(CreatePilotService)
     private readonly createPilotService: CreatePilotService,
+    @Inject(CreateShipService)
+    private readonly createShipService: CreateShipService,
   ) {}
 
   @Get()
@@ -40,6 +45,18 @@ export class AppController {
         body.currentPlanet,
         body.credits,
       ),
+    );
+
+    return response.status(HttpStatus.ACCEPTED).send();
+  }
+
+  @Post('/ship')
+  async createShip(
+    @Body() body: CreateShipRequest,
+    @Res() response: Response,
+  ): Promise<Response> {
+    await this.createShipService.createShip(
+      new CreateShipDTO(body.fuelCapacity, body.fuelLevel, body.cargoCapacity),
     );
 
     return response.status(HttpStatus.OK).send(body);

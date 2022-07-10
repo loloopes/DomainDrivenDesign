@@ -8,7 +8,7 @@ export class PilotRepository {
     private pilotRepository: Repository<PilotEntity>,
   ) {}
 
-  async createOrUpdate(pilot: Pilot): Promise<any> {
+  async create(pilot: Pilot): Promise<void> {
     const newPilot = this.pilotRepository.create({
       certification: pilot.getCertification(),
       name: pilot.getName(),

@@ -11,7 +11,7 @@ export class CreatePilotService {
     private readonly pilotRepository: PilotRepositoryInterface,
   ) {}
 
-  public async createPilot(createPilotDTO: CreatePilotDTO): Promise<any> {
+  public async createPilot(createPilotDTO: CreatePilotDTO): Promise<void> {
     const newPilot = new Pilot(
       createPilotDTO.certification,
       createPilotDTO.name,
@@ -20,6 +20,6 @@ export class CreatePilotService {
       PlanetsEnum[createPilotDTO.current_plane],
     );
 
-    await this.pilotRepository.createOrUpdate(newPilot);
+    await this.pilotRepository.create(newPilot);
   }
 }
