@@ -1,15 +1,28 @@
+import { Contract } from './contract';
 import { PlanetsEnum } from './enums/planets.enum';
 import { DomainException } from './exception/domain.exception';
 
 export class Pilot {
   constructor(
-    public readonly certification: string,
-    public readonly name: string,
-    public readonly age: number,
-    public readonly credits: number,
-    public readonly currentPlanet: PlanetsEnum,
+    private readonly certification: string,
+    private readonly name: string,
+    private readonly age: number,
+    private credits: number,
+    private readonly currentPlanet: PlanetsEnum,
   ) {
     this.validate();
+  }
+
+  public earnContract(contract: Contract): void {
+    this.adjustBalance(contract.getValue());
+  }
+
+  public getCredits(): number {
+    return this.credits;
+  }
+
+  private adjustBalance(credits: number) {
+    this.credits += credits;
   }
 
   private validate(): void {

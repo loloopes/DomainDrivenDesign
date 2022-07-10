@@ -13,6 +13,10 @@ export class Contract {
     this.validate();
   }
 
+  public getValue(): number {
+    return this.value;
+  }
+
   validate(): void {
     if (!this.description || this.description.length < 1) {
       throw new DomainException('Decription field should be valid string');

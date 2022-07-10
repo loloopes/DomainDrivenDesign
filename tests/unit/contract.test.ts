@@ -102,5 +102,6 @@ describe('Contract test', () => {
     );
 
     expect(newContract).toBeInstanceOf(Contract);
+    expect(newContract.getValue()).toBe(contract.value);
   });
 });

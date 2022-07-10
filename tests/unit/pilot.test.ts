@@ -1,4 +1,7 @@
 import { faker } from '@faker-js/faker';
+import { Contract } from '../../src/domain/contract';
+import { ResourcesEnum } from '../../src/domain/enums/resources.enum';
+import { Resource } from '../../src/domain/resource';
 import { PlanetsEnum } from '../../src/domain/enums/planets.enum';
 import { DomainException } from '../../src/domain/exception/domain.exception';
 import { Pilot } from '../../src/domain/pilot';
@@ -15,6 +18,15 @@ describe('Pilot test', () => {
       credits: faker.datatype.number(),
       currentPlanet: PlanetsEnum.ANDVARI,
     };
+
+    const pilotFixture = () =>
+      new Pilot(
+        pilot.certification,
+        pilot.name,
+        pilot.age,
+        pilot.credits,
+        pilot.currentPlanet,
+      );
 
     class Payload {
       public readonly certification = pilot.certification;
@@ -93,15 +105,25 @@ describe('Pilot test', () => {
     });
 
     it('should create a pilot with valid information', () => {
-      const newPilot = new Pilot(
-        pilot.certification,
-        pilot.name,
-        pilot.age,
-        pilot.credits,
-        pilot.currentPlanet,
-      );
+      const newPilot = pilotFixture();
 
       expect(newPilot).toBeInstanceOf(Pilot);
+    });
+
+    it('should adjust pilot`s credits after earning a contract', () => {
+      const newPilot = pilotFixture();
+
+      newPilot.earnContract(
+        new Contract(
+          'Description',
+          [new Resource(ResourcesEnum.FOOD, 50)],
+          PlanetsEnum.ANDVARI,
+          PlanetsEnum.AQUA,
+          500,
+        ),
+      );
+
+      expect(newPilot.getCredits()).toBe(pilot.credits + 500);
     });
   });
 });
