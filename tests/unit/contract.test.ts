@@ -7,10 +7,7 @@ import { Resource } from '../../src/domain/resource';
 describe('Contract test', () => {
   const contract = {
     decription: 'A contract',
-    payload: [
-      new Resource(ResourcesEnum.MINERALS, 50),
-      new Resource(ResourcesEnum.FOOD, 20),
-    ],
+    payloadId: 2,
     origin: PlanetsEnum.AQUA,
     destination: PlanetsEnum.DEMETER,
     value: 500,
@@ -18,7 +15,7 @@ describe('Contract test', () => {
 
   class Payload {
     public readonly description = contract.decription;
-    public readonly payload = contract.payload;
+    public readonly payload = contract.payloadId;
     public readonly origin = contract.origin;
     public readonly destination = contract.destination;
     public readonly value = contract.value;
@@ -54,7 +51,7 @@ describe('Contract test', () => {
     const res = () => {
       new Contract(
         '',
-        contract.payload,
+        contract.payloadId,
         contract.origin,
         contract.destination,
         contract.value,
@@ -68,7 +65,7 @@ describe('Contract test', () => {
     const res = () => {
       new Contract(
         contract.decription,
-        [],
+        null,
         contract.origin,
         contract.destination,
         20,
@@ -82,7 +79,7 @@ describe('Contract test', () => {
     const res = () => {
       new Contract(
         contract.decription,
-        contract.payload,
+        contract.payloadId,
         contract.origin,
         contract.destination,
         -20,
@@ -95,7 +92,7 @@ describe('Contract test', () => {
   it('should successfully create a contract', () => {
     const newContract = new Contract(
       contract.decription,
-      contract.payload,
+      contract.payloadId,
       contract.origin,
       contract.destination,
       contract.value,

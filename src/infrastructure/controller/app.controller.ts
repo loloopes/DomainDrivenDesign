@@ -8,23 +8,28 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { CreatePilotService } from '../../application/createPilot.service';
-import { CreateShipService } from '../../application/createShip.service';
+import { PilotService } from '../../application/pilot.serive.ts';
+import { ShipService } from '../../application/createShip.service';
 import { CreatePilotDTO } from '../../application/dto/createPilotDTO';
 import { AppService } from '../../application/app.service';
 import { CreatePilotRequest } from './request/createPilot.request';
 import { CreateShipRequest } from './request/createShip.request';
-import { CreateShipDTO } from 'src/application/dto/createShipDTO';
+import { CreateShipDTO } from '../../application/dto/createShipDTO';
+import { CreateContractRequest } from './request/createContract.request';
+import { ContractService } from '../../application/contract.service.ts';
+import { CreateContractDTO } from '../../application/dto/createContractDTO';
 
 @Controller()
 export class AppController {
   constructor(
     @Inject(AppService)
     private readonly appService: AppService,
-    @Inject(CreatePilotService)
-    private readonly createPilotService: CreatePilotService,
-    @Inject(CreateShipService)
-    private readonly createShipService: CreateShipService,
+    @Inject(PilotService)
+    private readonly pilotService: PilotService,
+    @Inject(ShipService)
+    private readonly shipService: ShipService,
+    @Inject(ContractService)
+    private readonly contractService: ContractService,
   ) {}
 
   @Get()
@@ -37,7 +42,7 @@ export class AppController {
     @Body() body: CreatePilotRequest,
     @Res() response: Response,
   ): Promise<Response> {
-    await this.createPilotService.createPilot(
+    await this.pilotService.createPilot(
       new CreatePilotDTO(
         body.certification,
         body.name,
@@ -55,8 +60,26 @@ export class AppController {
     @Body() body: CreateShipRequest,
     @Res() response: Response,
   ): Promise<Response> {
-    await this.createShipService.createShip(
+    await this.shipService.createShip(
       new CreateShipDTO(body.fuelCapacity, body.fuelLevel, body.cargoCapacity),
+    );
+
+    return response.status(HttpStatus.ACCEPTED).send();
+  }
+
+  @Post('/contract')
+  async createContract(
+    @Body() body: CreateContractRequest,
+    @Res() response: Response,
+  ): Promise<Response> {
+    await this.contractService.createContract(
+      new CreateContractDTO(
+        body.description,
+        body.payloadId,
+        body.origin,
+        body.destination,
+        body.value,
+      ),
     );
 
     return response.status(HttpStatus.OK).send(body);

@@ -1,10 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ShipRepositoryInterface } from 'src/domain/interface/shipRepositoryInterface';
-import { Ship } from 'src/domain/ship';
+import { ShipRepositoryInterface } from '../domain/interface/shipRepositoryInterface';
+import { Ship } from '../domain/ship';
 import { CreateShipDTO } from './dto/createShipDTO';
-
 @Injectable()
-export class CreateShipService {
+export class ShipService {
   constructor(
     @Inject('ShipRepository')
     private readonly shipRepository: ShipRepositoryInterface,

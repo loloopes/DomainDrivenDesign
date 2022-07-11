@@ -8,7 +8,7 @@ export class Pilot {
     private readonly name: string,
     private readonly age: number,
     private credits: number,
-    private readonly currentPlanet: PlanetsEnum,
+    private readonly currentPlanet: string,
   ) {
     this.validate();
   }

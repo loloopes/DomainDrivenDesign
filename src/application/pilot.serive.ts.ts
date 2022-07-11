@@ -5,7 +5,7 @@ import { Pilot } from '../domain/pilot';
 import { CreatePilotDTO } from './dto/createPilotDTO';
 
 @Injectable()
-export class CreatePilotService {
+export class PilotService {
   constructor(
     @Inject('PilotRepository')
     private readonly pilotRepository: PilotRepositoryInterface,

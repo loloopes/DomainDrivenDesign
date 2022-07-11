@@ -113,11 +113,12 @@ describe('Pilot test', () => {
     it('should adjust pilot`s credits after earning a contract', () => {
       const newPilot = pilotFixture();
       const contratReward = 500;
+      const payloadId = 2;
 
       newPilot.earnContract(
         new Contract(
           'Description',
-          [new Resource(ResourcesEnum.FOOD, 50)],
+          payloadId,
           PlanetsEnum.ANDVARI,
           PlanetsEnum.AQUA,
           contratReward,
