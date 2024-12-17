@@ -22,6 +22,7 @@ A ideia central é criar um modelo de domínio que reflita de forma clara e prec
   Custo inicial, exige tempo e esforço no início do projeto para modelar o domínio, definir as camadas corretamente e fazer o mapa de contexto/domínio.
   Overdesign, se mal aplicado, pode resultar em complexidade excessiva para problemas simples
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### This is a simple DDD application
 
