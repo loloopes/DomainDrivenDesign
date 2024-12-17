@@ -29,7 +29,7 @@ A ideia central é criar um modelo de domínio que reflita de forma clara e prec
 Domain-Driven Design (DDD) is a software development approach that focuses on the complexity of the business domain and the collaboration between domain experts and developers.
 The central idea is to create a domain model that clearly and accurately reflects the business rules and operations.
 
-## composed by 
+## Composed by 
 
 - Infrastructure (where all dependencies go)
 - Application (where all domain logic happens)
